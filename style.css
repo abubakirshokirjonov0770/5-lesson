@@ -1,0 +1,994 @@
+/* ==========================================================
+   UP BUSINESS — landing page
+   style.css  (index.html bilan bitta papkada turishi kerak)
+   ========================================================== */
+
+
+/* ---------- 1. Ranglar va o'zgaruvchilar ---------- */
+:root {
+    --purple: #7c76bb;
+    /* asosiy rang: sarlavhalar, tugmalar */
+    --purple-dark: #6a64ad;
+    /* tugma ustiga borganda */
+    --pink: #ff87b0;
+    /* "level up", "Portfolio Service" */
+    --text: #55575d;
+    /* oddiy matn */
+    --logo-gray: #acaeb3;
+    /* brendlar qatori */
+    --soft-blue: #f6fbff;
+    /* dekorativ doiralar va footer foni */
+    --soft-blue-2: #edf6ff;
+    /* footerdagi doiralar */
+    --card-blue: #dcf0ff;
+    /* xizmat kartalari foni */
+    --white: #ffffff;
+
+    --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+
+/* ---------- 2. Umumiy sozlamalar (reset) ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    /* dekorativ doiralar ekrandan chiqib ketmasligi uchun */
+}
+
+body {
+    font-family: var(--font);
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--text);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    width: min(1240px, 100% - 40px);
+    margin-inline: auto;
+}
+
+.container--wide {
+    width: min(1330px, 100% - 40px);
+}
+
+
+/* ---------- 3. Tugmalar ---------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border: 1px solid var(--purple);
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.25s, color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.btn svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.25s;
+}
+
+.btn--primary {
+    background: var(--purple);
+    color: var(--white);
+}
+
+.btn--primary:hover {
+    background: var(--purple-dark);
+    box-shadow: 0 10px 22px rgba(124, 118, 187, 0.35);
+    transform: translateY(-2px);
+}
+
+.btn--outline {
+    color: var(--purple);
+    background: transparent;
+}
+
+.btn--outline:hover {
+    background: var(--purple);
+    color: var(--white);
+}
+
+.btn--outline:hover svg {
+    transform: translateX(3px);
+}
+
+.btn--small {
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--purple);
+    background: transparent;
+}
+
+.btn--small:hover {
+    background: var(--purple);
+    color: var(--white);
+}
+
+
+/* ---------- 4. Header (menyu) ---------- */
+.header {
+    position: relative;
+    z-index: 10;
+    padding: 40px 0;
+}
+
+.header__inner {
+    position: relative;
+    width: min(1280px, 100% - 40px);
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    color: var(--purple);
+}
+
+.logo__icon {
+    width: 16px;
+    height: 24px;
+    color: var(--pink);
+    flex-shrink: 0;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+}
+
+.nav a:not(.btn) {
+    position: relative;
+    font-weight: 500;
+    white-space: nowrap;
+    color: var(--purple);
+}
+
+/* menyu havolasi tagidagi chiziq (hover) */
+.nav a:not(.btn)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--pink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s;
+}
+
+.nav a:not(.btn):hover::after {
+    transform: scaleX(1);
+}
+
+.nav .btn {
+    margin-left: 6px;
+    padding: 11px 21px;
+}
+
+/* mobil menyu tugmasi — kompyuterda ko'rinmaydi */
+.menu-toggle {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.burger {
+    display: none;
+}
+
+
+/* ---------- 5. Dekorativ och ko'k doiralar ---------- */
+.hero__text,
+.hero__image,
+.feature__text,
+.feature__image,
+.section-head,
+.footer__brand,
+.footer__col {
+    position: relative;
+    isolation: isolate;
+}
+
+.hero__text::before,
+.hero__image::before,
+.hero__image::after,
+.feature__text::before,
+.feature__image::before,
+.section-head::before,
+.footer::before,
+.footer::after,
+.footer__brand::before,
+.footer__col--location::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    background: var(--soft-blue);
+    pointer-events: none;
+}
+
+
+/* ---------- 6. Hero ---------- */
+.hero {
+    padding: 92px 0 169px;
+}
+
+.hero__text {
+    padding-bottom: 14px;
+}
+
+.hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.116fr);
+    align-items: center;
+}
+
+.hero h1 {
+    max-width: 560px;
+    font-size: clamp(40px, 4.9vw, 70px);
+    line-height: 1.26;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--purple);
+}
+
+.hero h1 span {
+    color: var(--pink);
+}
+
+.hero p {
+    max-width: 540px;
+    margin: 35px 0 40px;
+}
+
+.hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.hero__image svg {
+    width: 100%;
+    margin-left: auto;
+}
+
+.hero__text::before {
+    width: 338px;
+    height: 338px;
+    left: -241px;
+    top: 77px;
+}
+
+.hero__image::before {
+    width: 256px;
+    height: 256px;
+    left: 456px;
+    top: -58px;
+}
+
+.hero__image::after {
+    width: 176px;
+    height: 176px;
+    left: -38px;
+    top: 346px;
+}
+
+
+/* ---------- 7. Brendlar ---------- */
+.brands__card {
+    max-width: 1172px;
+    margin: 0 auto;
+    padding: 38px 64px 42px;
+    text-align: center;
+    background: #fdfeff;
+    border-radius: 10px;
+    box-shadow: 0 18px 40px rgba(31, 45, 61, 0.05);
+}
+
+.brands__title {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    color: var(--purple);
+}
+
+.brands__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 40px;
+    margin-top: 35px;
+}
+
+.brands__list li {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: -0.02em;
+    color: var(--logo-gray);
+    transition: color 0.25s;
+}
+
+.brands__list li:hover {
+    color: var(--purple);
+}
+
+
+/* ---------- 8. Portfolio bo'limlari ---------- */
+.portfolio {
+    padding-top: 79px;
+}
+
+.feature {
+    padding: 125px 0;
+}
+
+.feature--chat {
+    padding-top: 136px;
+}
+
+.feature__text {
+    padding-top: 16px;
+}
+
+.feature--invest .feature__text {
+    padding-top: 40px;
+}
+
+.feature__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.28fr) minmax(0, 1fr);
+    gap: 30px;
+    align-items: center;
+}
+
+/* rasm chapda bo'ladigan variant */
+.feature--reverse .feature__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.14fr);
+    gap: 80px;
+}
+
+.feature--reverse .feature__image {
+    order: -1;
+}
+
+.label {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--pink);
+}
+
+.feature h2,
+.section-head h2 {
+    font-size: clamp(30px, 3.1vw, 44px);
+    line-height: 1.27;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--purple);
+}
+
+.feature p {
+    max-width: 512px;
+    margin: 30px 0;
+}
+
+.feature__links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text);
+}
+
+.link svg {
+    width: 16px;
+    height: 16px;
+    color: var(--purple);
+}
+
+.link span {
+    padding-bottom: 3px;
+    border-bottom: 2px solid #dbdaec;
+    transition: border-color 0.25s, color 0.25s;
+}
+
+.link--active span,
+.link:hover span {
+    border-color: #8c87c3;
+}
+
+.link:hover span {
+    color: var(--purple);
+}
+
+/* har bir bo'limning doiralari */
+.feature--shop .feature__text::before {
+    width: 238px;
+    height: 238px;
+    left: -141px;
+    top: -65px;
+}
+
+.feature--shop .feature__image::before {
+    width: 350px;
+    height: 350px;
+    left: 326px;
+    top: 140px;
+}
+
+.feature--invest .feature__image::before {
+    width: 246px;
+    height: 246px;
+    left: 325px;
+    top: -3px;
+}
+
+.feature--invest .feature__text::before {
+    width: 184px;
+    height: 184px;
+    left: 465px;
+    top: 181px;
+}
+
+.feature--chat .feature__image::before {
+    width: 294px;
+    height: 294px;
+    left: -13px;
+    top: -44px;
+}
+
+.feature--chat .feature__text::before {
+    width: 180px;
+    height: 180px;
+    left: -78px;
+    top: 211px;
+}
+
+
+/* ---------- 9. Xizmatlar (kartalar) ---------- */
+.services {
+    padding: 76px 0 182px;
+}
+
+.section-head {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-head p {
+    margin-top: 22px;
+}
+
+.section-head::before {
+    width: 160px;
+    height: 160px;
+    left: 468px;
+    top: -27px;
+}
+
+.services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 94px;
+    margin-top: 113px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 56px 24px 47px;
+    text-align: center;
+    background: var(--card-blue);
+    border-radius: 24px;
+    box-shadow: 0 16px 32px rgba(40, 60, 90, 0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 40px rgba(40, 60, 90, 0.12);
+}
+
+.card__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 280px;
+}
+
+.card__image svg {
+    width: 100%;
+    max-width: 320px;
+}
+
+.card h3 {
+    margin-top: 24px;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 32px;
+    color: var(--purple);
+}
+
+.card p {
+    max-width: 330px;
+    margin-top: 40px;
+}
+
+.card .btn {
+    margin-top: 40px;
+}
+
+
+/* ---------- 10. Footer ---------- */
+.footer {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 90px 0 30px;
+    background: var(--soft-blue);
+}
+
+.footer__grid {
+    width: min(1304px, 100% - 40px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1.65fr 0.75fr 1.2fr 1fr;
+    align-items: start;
+}
+
+.footer__brand p {
+    max-width: 350px;
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.socials {
+    display: flex;
+    gap: 21px;
+    margin-top: 34px;
+}
+
+.socials a {
+    display: grid;
+    place-items: center;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background: #e6f4ff;
+    color: var(--purple);
+    font-size: 16px;
+    transition: background-color 0.25s, color 0.25s, transform 0.25s;
+}
+
+.socials a:hover {
+    background: var(--purple);
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+.footer h4 {
+    margin-top: 3px;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 22px;
+    color: var(--purple);
+}
+
+.footer__col ul {
+    display: grid;
+    margin-top: 13px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.footer__links {
+    gap: 18px;
+}
+
+.footer__links a:hover,
+.footer__contact a:hover {
+    color: var(--purple);
+}
+
+.footer__address {
+    gap: 19px;
+}
+
+.footer__address li {
+    display: flex;
+    gap: 14px;
+    line-height: 22px;
+}
+
+.footer__address svg {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 6px;
+    color: var(--purple);
+}
+
+.footer__contact {
+    gap: 14px;
+}
+
+.footer__copy {
+    margin-top: 162px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+/* footer doiralari */
+.footer::before,
+.footer::after,
+.footer__brand::before,
+.footer__col--location::before {
+    background: var(--soft-blue-2);
+}
+
+.footer::before {
+    width: 150px;
+    height: 150px;
+    left: -61px;
+    bottom: -48px;
+}
+
+.footer::after {
+    width: 240px;
+    height: 240px;
+    right: -18px;
+    bottom: -56px;
+}
+
+.footer__brand::before {
+    width: 204px;
+    height: 204px;
+    left: 150px;
+    top: -77px;
+}
+
+.footer__col--location::before {
+    width: 98px;
+    height: 98px;
+    left: 117px;
+    top: 149px;
+}
+
+
+/* ==========================================================
+   11. Moslashuvchan dizayn (planshet va telefon)
+   ========================================================== */
+@media (max-width: 1200px) {
+    .nav {
+        gap: 32px;
+    }
+
+    .services__grid {
+        gap: 32px;
+    }
+
+    .card {
+        padding-inline: 18px;
+    }
+
+    .footer__grid {
+        grid-template-columns: 1.4fr 0.8fr 1.2fr 1fr;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 992px) {
+    .header {
+        padding: 20px 0;
+    }
+
+    /* burger tugma */
+    .burger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .burger span,
+    .burger span::before,
+    .burger span::after {
+        display: block;
+        width: 24px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--purple);
+        transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .burger span {
+        position: relative;
+    }
+
+    .burger span::before,
+    .burger span::after {
+        content: "";
+        position: absolute;
+        left: 0;
+    }
+
+    .burger span::before {
+        top: -7px;
+    }
+
+    .burger span::after {
+        top: 7px;
+    }
+
+    .menu-toggle:focus-visible+.burger {
+        outline: 2px solid var(--purple);
+    }
+
+    /* ochiladigan menyu */
+    .nav {
+        position: absolute;
+        top: calc(100% + 12px);
+        right: 0;
+        width: min(320px, 100%);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        padding: 16px;
+        background: var(--white);
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(60, 50, 120, 0.15);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+    }
+
+    .nav a:not(.btn) {
+        padding: 12px 8px;
+    }
+
+    .nav a:not(.btn)::after {
+        display: none;
+    }
+
+    .nav .btn {
+        margin: 8px 0 0;
+    }
+
+    .menu-toggle:checked~.nav {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+
+    .menu-toggle:checked+.burger span {
+        background: transparent;
+    }
+
+    .menu-toggle:checked+.burger span::before {
+        top: 0;
+        transform: rotate(45deg);
+    }
+
+    .menu-toggle:checked+.burger span::after {
+        top: 0;
+        transform: rotate(-45deg);
+    }
+
+    .hero {
+        padding: 48px 0 100px;
+    }
+
+    .hero__grid,
+    .feature__grid,
+    .feature--reverse .feature__grid {
+        grid-template-columns: 1fr;
+        gap: 56px;
+    }
+
+    .hero__text,
+    .feature__text {
+        text-align: center;
+    }
+
+    .hero h1,
+    .hero p,
+    .feature p {
+        margin-inline: auto;
+    }
+
+    .hero__buttons,
+    .feature__links {
+        justify-content: center;
+    }
+
+    .hero__image svg,
+    .feature__image svg {
+        margin-inline: auto;
+    }
+
+    .feature--reverse .feature__image {
+        order: 0;
+    }
+
+    .feature h2 br {
+        display: none;
+    }
+
+    .portfolio {
+        padding-top: 40px;
+    }
+
+    .feature {
+        padding: 60px 0;
+    }
+
+    .services {
+        padding: 60px 0 100px;
+    }
+
+    .services__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 64px;
+    }
+
+    /* toq sonli oxirgi kartani o'rtaga qo'yish */
+    .card:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: calc(50% - 16px);
+    }
+
+    .footer__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px 24px;
+    }
+
+    .footer__copy {
+        margin-top: 72px;
+    }
+
+    /* kichik ekranda doiralarni soddalashtiramiz */
+    .hero__text::before,
+    .feature__text::before,
+    .section-head::before {
+        display: none;
+    }
+
+    .hero__image::before,
+    .feature__image::before {
+        left: auto;
+        right: -40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo {
+        font-size: 22px;
+    }
+
+    .brands__card {
+        padding: 28px 24px 32px;
+    }
+
+    .brands__list {
+        justify-content: center;
+        gap: 16px 32px;
+    }
+
+    .brands__list li {
+        font-size: 20px;
+    }
+
+    .services__grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin-inline: auto;
+    }
+
+    .card:last-child:nth-child(odd) {
+        width: 100%;
+    }
+
+    .footer {
+        padding-top: 64px;
+    }
+
+    .footer__grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero__buttons {
+        gap: 16px;
+    }
+
+    .hero__buttons .btn {
+        flex: 1 1 100%;
+    }
+
+    .card__image {
+        height: auto;
+    }
+}
+
+/* animatsiyani yoqtirmaydiganlar uchun */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+}
